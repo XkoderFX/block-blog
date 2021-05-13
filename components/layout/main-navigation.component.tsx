@@ -1,10 +1,10 @@
 import React from 'react';
 import Logo from './logo.component';
 import Link from 'next/link';
-
+import classes from './main-navigation.styles.module.css';
 const MainNavigation = () => {
     return (
-        <header>
+        <header className={classes.header}>
             <Link href="/">
                 <a>
                     <Logo></Logo>
