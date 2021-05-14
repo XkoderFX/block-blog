@@ -1,16 +1,17 @@
 import React from 'react';
+import IPost from '../../data/post';
 import PostItem from './post-item.component';
 import classes from './posts-grid.styles.module.css';
 
 interface PostsGridProps {
-    posts: unknown[];
+    posts: IPost[];
 }
 
 const PostsGrid: React.FC<PostsGridProps> = ({ posts }) => {
     return (
         <ul className={classes.gird}>
             {posts.map((post) => (
-                <PostItem></PostItem>
+                <PostItem post={post}></PostItem>
             ))}
         </ul>
     );
