@@ -16,10 +16,11 @@ const PostItem: React.FC<PostItemProps> = ({ post }) => {
     });
 
     const imagePath = `/images/posts/${post.slug}/${post.image}`;
+    const linkPath = `/posts/${post.slug}`;
 
     return (
         <li className={classes.post}>
-            <Link href={'d'}>
+            <Link href={linkPath}>
                 <a>
                     <figure>
                         <Image
@@ -28,6 +29,7 @@ const PostItem: React.FC<PostItemProps> = ({ post }) => {
                             width={300}
                             height={200}
                             className={classes.image}
+                            layout="responsive"
                         ></Image>
                         <figcaption className={classes.content}>
                             <h3>{post.title}</h3>

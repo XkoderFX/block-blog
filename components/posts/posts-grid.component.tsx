@@ -9,9 +9,9 @@ interface PostsGridProps {
 
 const PostsGrid: React.FC<PostsGridProps> = ({ posts }) => {
     return (
-        <ul className={classes.gird}>
+        <ul className={classes.grid}>
             {posts.map((post) => (
-                <PostItem post={post}></PostItem>
+                <PostItem key={post.slug} post={post}></PostItem>
             ))}
         </ul>
     );
