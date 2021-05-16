@@ -1,9 +1,25 @@
+import { GetStaticProps } from 'next';
 import React from 'react';
 import AllPosts from '../../components/posts/all-posts.component';
-import { DUMMY_POSTS } from '../../data/post';
+import IPost, { DUMMY_POSTS } from '../../data/post';
+import { getAllPosts } from '../../lib/post-util';
 
-const AllPostsPage = () => {
-    return <AllPosts posts={DUMMY_POSTS}></AllPosts>;
+interface AllPostsPage {
+    posts: IPost[];
+}
+
+const AllPostsPage: React.FC<AllPostsPage> = ({ posts }) => {
+    return <AllPosts posts={posts}></AllPosts>;
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+    const allPosts = await getAllPosts();
+
+    return {
+        props: {
+            posts: allPosts,
+        },
+    };
 };
 
 export default AllPostsPage;

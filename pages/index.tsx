@@ -1,15 +1,32 @@
+import { GetStaticProps } from 'next';
 import React from 'react';
 import FeaturedPosts from '../components/home-page/featured-posts.component';
 import Hero from '../components/home-page/hero.component';
-import { DUMMY_POSTS } from '../data/post';
+import IPost from '../data/post';
+import { getFeaturedPosts } from '../lib/post-util';
 
-const HomePage = () => {
+interface HomePageProps {
+    posts: IPost[];
+}
+
+const HomePage: React.FC<HomePageProps> = ({ posts }) => {
     return (
         <>
             <Hero></Hero>
-            <FeaturedPosts posts={DUMMY_POSTS}></FeaturedPosts>
+            <FeaturedPosts posts={posts}></FeaturedPosts>
         </>
     );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+    const featuredPosts = await getFeaturedPosts();
+
+    return {
+        props: {
+            posts: featuredPosts,
+        },
+        revalidate: 60,
+    };
 };
 
 export default HomePage;

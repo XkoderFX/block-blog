@@ -8,7 +8,7 @@ interface FilePost {
     slug: string;
 }
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), 'content', 'posts');
 
 const getPostData = async (fileName: string) => {
     const filePath = path.join(postsDirectory, fileName);
@@ -22,7 +22,7 @@ const getPostData = async (fileName: string) => {
     return postData;
 };
 
-const getAllPosts = async () => {
+export const getAllPosts = async () => {
     const postFiles = await fs.readdir(postsDirectory);
 
     const allPosts = await Promise.all(
@@ -34,7 +34,7 @@ const getAllPosts = async () => {
     return allPosts;
 };
 
-const getFeaturedPosts = async () => {
+export const getFeaturedPosts = async () => {
     const allPosts = await getAllPosts();
     const featuredPosts = allPosts.filter((post) => post.isFeatured);
     return featuredPosts;
