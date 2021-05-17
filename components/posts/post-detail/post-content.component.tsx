@@ -13,7 +13,7 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
 
     return (
         <article className={classes.content}>
-            <PostHeader title={post.title} image={imagePath}></PostHeader>
+            <PostHeader title={post.title}></PostHeader>
             <ReactMarkdown>{post.content}</ReactMarkdown>
         </article>
     );
