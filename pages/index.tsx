@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next';
 import React from 'react';
 import FeaturedPosts from '../components/home-page/featured-posts.component';
 import Hero from '../components/home-page/hero.component';
-import IPost from '../data/post';
+import IPost from '../content/data/post';
 import { getFeaturedPosts } from '../lib/post-util';
 
 interface HomePageProps {

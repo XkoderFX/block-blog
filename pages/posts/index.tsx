@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import React from 'react';
 import AllPosts from '../../components/posts/all-posts.component';
-import IPost from '../../data/post';
+import IPost from '../../content/data/post';
 import { getAllPosts } from '../../lib/post-util';
 
 interface AllPostsPage {

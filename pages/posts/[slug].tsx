@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import React from 'react';
 import PostContent from '../../components/posts/post-detail/post-content.component';
-import IPost from '../../data/post';
+import IPost from '../../content/data/post';
 import { getPostData, getPostsFiles } from '../../lib/post-util';
 
 interface PostDetailProps {

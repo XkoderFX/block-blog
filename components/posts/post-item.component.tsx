@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import classes from './post-item.styles.module.css';
-import IPost from '../../data/post';
+import IPost from '../../content/data/post';
 
 interface PostItemProps {
     post: IPost;

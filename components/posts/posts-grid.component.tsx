@@ -1,5 +1,5 @@
 import React from 'react';
-import IPost from '../../data/post';
+import IPost from '../../content/data/post';
 import PostItem from './post-item.component';
 import classes from './posts-grid.styles.module.css';
 
