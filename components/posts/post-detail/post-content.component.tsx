@@ -4,6 +4,9 @@ import IPost from '../../../content/data/post';
 import classes from './post-content.module.css';
 import PostHeader from './post-header.component';
 import Image from 'next/image';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import atomDark from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark';
+
 interface PostContentProps {
     post: IPost;
 }
@@ -27,13 +30,13 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
         p(p: any) {
             //! the same is here
             const { node } = p;
-            if (node.children[0].type === 'img') {
+            if (node.children[0].tagName === 'img') {
                 const img = node.children[0];
 
                 return (
                     <div className={classes.image}>
                         <Image
-                            src={`/images/posts/${post.slug}/${img.src}`}
+                            src={`/images/posts/${post.slug}/${img.properties.src}`}
                             alt={img.alt}
                             width={600}
                             height={300}
@@ -44,6 +47,19 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
             }
 
             return <p>{p.children}</p>;
+        },
+        code(code: any) {
+            const { className, children } = code;
+            const language = className.split('-')[1]; // className is something like language-js => We need the "js" part here
+            console.log(language);
+
+            return (
+                <SyntaxHighlighter
+                    style={atomDark}
+                    language={language}
+                    children={children}
+                ></SyntaxHighlighter>
+            );
         },
     };
 
