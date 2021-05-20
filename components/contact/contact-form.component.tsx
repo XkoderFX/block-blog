@@ -4,9 +4,9 @@ import React from 'react';
 import classes from './contact-form.module.css';
 import * as Yup from 'yup';
 
-const sleep = (ms: number) => new Promise((r, _) => setTimeout(r, ms));
-
 const ContactForm = () => {
+    const [isSubmitted, setIsSubmitted] = React.useState(false);
+
     return (
         <section className={classes.contact}>
             <h1>How can I help you?</h1>
@@ -27,10 +27,12 @@ const ContactForm = () => {
                         .min(5, 'must be at least 5 characters')
                         .required('Required'),
                 })}
-                onSubmit={async (values) => {
+                onSubmit={async (values, { resetForm }) => {
                     const {} = axios.post('/api/contact', {
                         ...values,
                     });
+                    resetForm();
+                    setIsSubmitted(true);
                 }}
             >
                 {({ isSubmitting }) => (
@@ -75,6 +77,12 @@ const ContactForm = () => {
                                     <p className={classes.error}>{msg}</p>
                                 )}
                             </ErrorMessage>
+                            {isSubmitted ? (
+                                <p>
+                                    Thanks, I will be glad to get in touch with
+                                    you!
+                                </p>
+                            ) : null}
                         </div>
                         <div className={classes.actions}>
                             <button disabled={isSubmitting} type="submit">
