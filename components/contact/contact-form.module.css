@@ -65,6 +65,12 @@
     border-color: var(--color-primary-500);
 }
 
+.error {
+    padding: 0;
+    margin: 0;
+    color: red;
+}
+
 @media (min-width: 768px) {
     .contact h1 {
         font-size: var(--size-16);
