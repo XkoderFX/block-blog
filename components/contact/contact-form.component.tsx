@@ -4,8 +4,9 @@ import React from 'react';
 import classes from './contact-form.module.css';
 import * as Yup from 'yup';
 
-const ContactForm = () => {
+const sleep = (ms: number) => new Promise((r, _) => setTimeout(r, ms));
 
+const ContactForm = () => {
     return (
         <section className={classes.contact}>
             <h1>How can I help you?</h1>
@@ -26,50 +27,62 @@ const ContactForm = () => {
                         .min(5, 'must be at least 5 characters')
                         .required('Required'),
                 })}
-                onSubmit={async (values, { setSubmitting }) => {
-                    
+                onSubmit={async (values) => {
+                    const {} = axios.post('/api/contact', {
+                        ...values,
+                    });
                 }}
             >
-                <Form className={classes.form}>
-                    <div className={classes.controls}>
-                        <div className={classes.control}>
-                            <label htmlFor="email">Your email</label>
-                            <Field name="email" type="email" required />
+                {({ isSubmitting }) => (
+                    <Form className={classes.form}>
+                        <div className={classes.controls}>
+                            <div className={classes.control}>
+                                <label htmlFor="email">Your email</label>
+                                <Field name="email" type="email" required />
+                                <ErrorMessage name="email">
+                                    {(msg) => (
+                                        <p className={classes.error}>{msg}</p>
+                                    )}
+                                </ErrorMessage>
+                            </div>
 
-                            <ErrorMessage name="email">
+                            <div className={classes.control}>
+                                <label htmlFor="name">Your name</label>
+                                <Field
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    required
+                                />
+                                <ErrorMessage name="name">
+                                    {(msg) => (
+                                        <p className={classes.error}>{msg}</p>
+                                    )}
+                                </ErrorMessage>
+                            </div>
+                        </div>
+                        <div className={classes.control}>
+                            <label htmlFor="message">Your message</label>
+                            <Field
+                                as="textarea"
+                                id="message"
+                                name="message"
+                                required
+                                rows={5}
+                            ></Field>
+                            <ErrorMessage name="message">
                                 {(msg) => (
                                     <p className={classes.error}>{msg}</p>
                                 )}
                             </ErrorMessage>
                         </div>
-
-                        <div className={classes.control}>
-                            <label htmlFor="name">Your name</label>
-                            <Field type="text" name="name" id="name" required />
-                            <ErrorMessage name="name">
-                                {(msg) => (
-                                    <p className={classes.error}>{msg}</p>
-                                )}
-                            </ErrorMessage>
+                        <div className={classes.actions}>
+                            <button disabled={isSubmitting} type="submit">
+                                Send Message
+                            </button>
                         </div>
-                    </div>
-                    <div className={classes.control}>
-                        <label htmlFor="message">Your message</label>
-                        <Field
-                            as="textarea"
-                            id="message"
-                            name="message"
-                            required
-                            rows={5}
-                        ></Field>
-                        <ErrorMessage name="message">
-                            {(msg) => <p className={classes.error}>{msg}</p>}
-                        </ErrorMessage>
-                    </div>
-                    <div className={classes.actions}>
-                        <button type="submit">Send Message</button>
-                    </div>
-                </Form>
+                    </Form>
+                )}
             </Formik>
         </section>
     );

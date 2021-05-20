@@ -71,6 +71,10 @@
     color: red;
 }
 
+.form button:disabled {
+    background-color: var(--color-grey-600);
+}
+
 @media (min-width: 768px) {
     .contact h1 {
         font-size: var(--size-16);
