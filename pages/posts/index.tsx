@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
 import React from 'react';
 import AllPosts from '../../components/posts/all-posts.component';
 import IPost from '../../content/data/post';
@@ -9,7 +10,15 @@ interface AllPostsPage {
 }
 
 const AllPostsPage: React.FC<AllPostsPage> = ({ posts }) => {
-    return <AllPosts posts={posts}></AllPosts>;
+    return (
+        <>
+            <Head>
+                <title>All Posts</title>
+                <meta name="description" content="A list of all programing related tutorials and posts"/>
+            </Head>
+            <AllPosts posts={posts}></AllPosts>
+        </>
+    );
 };
 
 export const getStaticProps: GetStaticProps = async () => {

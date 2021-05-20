@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Head from 'next/head';
 import React from 'react';
 import PostContent from '../../components/posts/post-detail/post-content.component';
 import IPost from '../../content/data/post';
@@ -9,7 +10,15 @@ interface PostDetailProps {
 }
 
 const PostDetailPage: React.FC<PostDetailProps> = ({ post }) => {
-    return <PostContent post={post}></PostContent>;
+    return (
+        <>
+            <Head>
+                <title>{post.title}</title>
+                <meta name="description" content={post.excerpt}></meta>
+            </Head>
+            <PostContent post={post}></PostContent>
+        </>
+    );
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
