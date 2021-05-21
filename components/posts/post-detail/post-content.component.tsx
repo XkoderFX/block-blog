@@ -12,7 +12,6 @@ interface PostContentProps {
 }
 
 const PostContent: React.FC<PostContentProps> = ({ post }) => {
-    const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
     const customComponents = {
         img(img: any) {
