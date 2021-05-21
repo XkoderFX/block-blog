@@ -4,15 +4,21 @@ import IPost from '../../../content/data/post';
 import classes from './post-content.module.css';
 import PostHeader from './post-header.component';
 import Image from 'next/image';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import atomDark from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark';
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
+import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+
+
+SyntaxHighlighter.registerLanguage('js', js);
+SyntaxHighlighter.registerLanguage('css', css);
+
 
 interface PostContentProps {
     post: IPost;
 }
 
 const PostContent: React.FC<PostContentProps> = ({ post }) => {
-
     const customComponents = {
         img(img: any) {
             //! only img argument as type of any is accepted
